@@ -22,18 +22,6 @@ from bpy.props import *
 from bpy.types import Panel, Operator, Menu
 from bpy.utils import previews
 
-# Add-on info
-bl_info = {
-    "name": "Easy HDRI",
-    "author": "Monaime Zaim (CodeOfArt.com)",
-    "version": (1, 0, 2),
-    "blender": (2, 80, 0),
-    "location": "View3D > Properties > Easy HDRI",
-    "description": "Load and test your HDRIs easily.", 
-    "wiki_url": "http://codeofart.com/easy-hdri/",
-    "tracker_url": "http://codeofart.com/easy-hdri/",      
-    "category": "3D View"}
-
 
 # Preview collections
 preview_collections = {}
