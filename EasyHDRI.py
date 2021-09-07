@@ -22,6 +22,14 @@ from bpy.props import *
 from bpy.types import Panel, Operator, Menu
 from bpy.utils import previews
 
+# Add-on info
+bl_info = {
+    "name": "Easy HDRI",
+    "version": (1, 0, 1),
+    "blender": (2, 80, 0),
+    "location": "View3D > Properties > Easy HDRI",
+    "description": "Load and test your HDRIs easily.",       
+    "category": "3D View"}
 
 # Preview collections
 preview_collections = {}
