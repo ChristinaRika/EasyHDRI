@@ -25,7 +25,7 @@ from bpy.utils import previews
 # Add-on info
 bl_info = {
     "name": "Easy HDRI",
-    "version": (1, 0, 1),
+    "version": (1, 0, 2),
     "blender": (2, 80, 0),
     "location": "View3D > Properties > Easy HDRI",
     "description": "Load and test your HDRIs easily.",       
@@ -552,6 +552,9 @@ class EASYHDRI_PT_main(Panel):
                 if 'Saturation' in nodes:
                     col = box.column()
                     col.prop(nodes['Saturation'].inputs[1], "default_value", text = "Saturation")                
+                if 'Mapping' in nodes:
+                    col = box.column()
+                    col.prop(nodes['Mapping'].inputs[2], "default_value", text = "Rotation")
         else:
             col.label(text = 'Not compatible with this render engine', icon = 'INFO')
             col.prop(scn.render, 'engine')
