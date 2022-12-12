@@ -183,7 +183,7 @@ def create_world_nodes():
     background = world.node_tree.nodes.new(type="ShaderNodeBackground")
     gamma = world.node_tree.nodes.new(type="ShaderNodeGamma")
     saturation = world.node_tree.nodes.new(type="ShaderNodeHueSaturation")
-    color = world.node_tree.nodes.new(type="ShaderNodeMixRGB")
+    color = world.node_tree.nodes.new(type="ShaderNodeMix")
     math_multiply = world.node_tree.nodes.new(type="ShaderNodeMath")
     math_divide = world.node_tree.nodes.new(type="ShaderNodeMath")
     math_add = world.node_tree.nodes.new(type="ShaderNodeMath")    
@@ -203,7 +203,8 @@ def create_world_nodes():
     math_add.name = 'Math_add'   
     math_add.operation = 'ADD'   
     math_add.inputs[1].default_value = 1.0
-    color.blend_type = 'MULTIPLY'  
+    color.data_type = 'RGBA'
+    color.blend_type = 'MULTIPLY'
     color.inputs[0].default_value = 0.0
         
     # Links
@@ -211,12 +212,12 @@ def create_world_nodes():
     world.node_tree.links.new(mapping.outputs[0], env.inputs[0])
     world.node_tree.links.new(env.outputs[0], gamma.inputs[0])
     world.node_tree.links.new(gamma.outputs[0], saturation.inputs[4])
-    world.node_tree.links.new(saturation.outputs[0], color.inputs[1])
+    world.node_tree.links.new(saturation.outputs[0], color.inputs[6])
     world.node_tree.links.new(env.outputs[0], math_multiply.inputs[0])
     world.node_tree.links.new(math_multiply.outputs[0], math_divide.inputs[0])
     world.node_tree.links.new(math_divide.outputs[0], math_add.inputs[0])
     world.node_tree.links.new(math_add.outputs[0], background.inputs[1])
-    world.node_tree.links.new(color.outputs[0], background.inputs[0])
+    world.node_tree.links.new(color.outputs[2], background.inputs[0])
     world.node_tree.links.new(background.outputs[0], output.inputs[0])    
     
     # Nodes location    
@@ -544,7 +545,7 @@ class EASYHDRI_PT_main(Panel):
                     col.prop(nodes['Mapping'], "rotation")                
                 if 'Mix' in nodes:
                     col = box.column(align = True)
-                    col.prop(nodes['Mix'].inputs[2], "default_value", text = "Tint")        
+                    col.prop(nodes['Mix'].inputs[7], "default_value", text = "Tint")        
                     col.prop(nodes['Mix'].inputs[0], "default_value", text = "Factor")
                 if 'Gamma' in nodes:
                     col = box.column()
